@@ -31,3 +31,31 @@ class Animal:
         self._health_records = []
         self._enclosure = None
 
+# Getters
+    def get_name(self):
+        return self._name
+
+    def get_species(self):
+        return self._species
+
+    def get_age(self):
+        return self._age
+
+    def get_dietary_needs(self):
+        return self._dietary_needs
+
+    def get_category(self):
+        return self._category
+
+    def get_required_environment(self):
+        return self._required_environment
+
+# Basic actions
+    def make_sound(self):
+        return "Some specific animal sound"
+
+    def eat(self):
+        return f"{self._name} is eating {self._dietary_needs}"
+
+    def sleep(self):
+        return f"{self._name} is sleeping"
