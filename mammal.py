@@ -6,3 +6,12 @@ ID: 110434667
 Username: saisy026
 This is my own work as defined by the University's Academic Integrity Policy.
 """
+
+from animal import Animal
+
+class Mammal(Animal):
+    def __init__(self, name, species, age,dietary_needs, required_environment):
+        super().__init__(name, species, age, dietary_needs,required_environment, category="mammal")
+
+
+
