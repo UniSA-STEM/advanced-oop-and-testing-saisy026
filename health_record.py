@@ -21,3 +21,17 @@ class HealthRecord:
         self._date_recorded = date_recorded
         self._severity = severity
         self._treatment = treatment
+
+# Getters
+    def get_description(self):
+        return self._description
+
+    def get_date_recorded(self):
+        return self._date_recorded
+
+    def get_severity(self):
+        return self._severity
+
+    def get_treatment(self):
+        return self._treatment
+
