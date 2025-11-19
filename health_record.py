@@ -16,6 +16,8 @@ class HealthRecord:
             raise ValueError("Invalid date")
         if severity not in range(1, 11):
             raise ValueError("Severity must be 1–10")
+        if treatment is not None and not isinstance(treatment, str):
+            raise ValueError("Treatment must be a string or None.")
 
         self._description = description
         self._date_recorded = date_recorded
@@ -35,3 +37,15 @@ class HealthRecord:
     def get_treatment(self):
         return self._treatment
 
+# Setters
+    def set_treatment(self, treatment):
+        if not isinstance(treatment, str):
+            raise ValueError("Treatment must be a string")
+        self._treatment = treatment
+
+# String display method
+    def __str__(self):
+        return (f"Date: {self._date_recorded}"
+                f"Severity level: {self._severity} "
+                f"Description: {self._description} "
+                f"Treatment: {self._treatment or 'None'}")
