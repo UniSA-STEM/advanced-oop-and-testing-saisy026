@@ -1,11 +1,12 @@
 """
-File: filename.py
+File: animal.py
 Description: A brief description of this Python module.
 Author: Suruchi saini
 ID: 110434667
 Username: saisy026
 This is my own work as defined by the University's Academic Integrity Policy.
 """
+from health_record import HealthRecord
 
 class Animal:
     def __init__(self, name, species, age, dietary_needs, category, required_environment  ):
@@ -30,6 +31,7 @@ class Animal:
         self._required_environment = required_environment
         self._health_records = []
         self._enclosure = None
+        self._health_status = "healthy"
 
 # Getters
     def get_name(self):
@@ -49,6 +51,24 @@ class Animal:
 
     def get_required_environment(self):
         return self._required_environment
+
+    def get_enclosure(self):
+        return self._enclosure
+
+    def get_health_status(self):
+        return self._health_status
+
+    def is_under_treatment(self):
+        return self._health_status == "under treatment"
+
+# Health management
+    def add_health_record(self, record):
+        if not isinstance(record, HealthRecord):
+            raise ValueError("Must be a HealthRecord object")
+        self._health_records.append(record)
+        if record.get_severity() > 5:
+            self._health_status = "under treatment"
+
 
 # Basic actions
     def make_sound(self):
