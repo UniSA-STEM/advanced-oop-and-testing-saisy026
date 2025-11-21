@@ -69,7 +69,6 @@ class Animal:
         if record.get_severity() > 5:
             self._health_status = "under treatment"
 
-
 # Basic actions
     def make_sound(self):
         return "Some specific animal sound"
