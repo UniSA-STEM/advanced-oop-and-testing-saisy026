@@ -26,3 +26,31 @@ class Enclosure:
         self._animals = []
         self._cleanliness = 100
 
+# Getters
+    def get_enclosure_id(self):
+        return self._enclosure_id
+
+    def get_environment_type(self):
+        return self._environment_type
+
+    def get_cleanliness(self):
+        return self._cleanliness
+
+    def get_animals(self):
+        return self._animals.copy()
+
+    def get_current_occupancy(self):
+        return len(self._animals)
+
+    def get_max_capacity(self):
+        return self._max_capacity
+
+    def is_full(self):
+        return len(self._animals) >= self._max_capacity
+
+    def clean(self):
+        self.cleanliness_increase = 50
+        self._cleanliness = min(100, self._cleanliness + self.cleanliness_increase)
+        return f" Enclosure {self._enclosure_id} cleaned. Cleanliness now: {self._cleanliness}% "
+
+
