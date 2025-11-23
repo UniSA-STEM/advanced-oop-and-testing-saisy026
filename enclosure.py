@@ -23,11 +23,12 @@ class Enclosure:
         self._size = size
         self._environment_type = environment_type
         self._max_capacity = max_capacity
-        self._animals = []
-        self._cleanliness = 100
+        self._animals = []       # list of animal
+        self._cleanliness = 100  # 0-100%
         self._allowed_category = None
 
 # Getters
+
     def get_enclosure_id(self):
         return self._enclosure_id
 
@@ -49,6 +50,8 @@ class Enclosure:
     def is_full(self):
         return len(self._animals) >= self._max_capacity
 
+#   Cleanliness management
+
     def clean(self,cleanliness_increase):
         cleanliness_increase = 50
         self._cleanliness = min(100, self._cleanliness + cleanliness_increase)
@@ -57,6 +60,8 @@ class Enclosure:
     def reduce_cleanliness(self,amount):
         amount = 10
         self._cleanliness = max(0, self._cleanliness - amount)
+
+#   Checks
 
     def can_add_animal(self, animal):
         if not isinstance(animal, Animal):
@@ -68,6 +73,9 @@ class Enclosure:
         if self._allowed_category is None:
             return True
         return animal.get_category() == self._allowed_category
+
+#   Animal management - Add a compatible animal and update enclosure state.
+#                       Remove an animal and reset related state if enclosure becomes empty.
 
     def add_animal(self, animal):
         if not isinstance(animal, Animal):
@@ -83,7 +91,7 @@ class Enclosure:
         if self._allowed_category is None:
             self._allowed_category = animal.get_category()
 
-        animal.set_enclosure(self)
+        animal.set_enclosure(self)      # Proper encapsulation
         self.reduce_cleanliness(5)
         return f"{animal.get_name()} added to {self._enclosure_id}"
 
@@ -92,10 +100,12 @@ class Enclosure:
             raise ValueError(f"{animal.get_name()} not in this enclosure")
 
         self._animals.remove(animal)
-        animal.remove_from_enclosure()  # Clean way
+        animal.remove_from_enclosure()   # Clean way to clear animal's reference
         if not self._animals:
             self._allowed_category = None
         return f"{animal.get_name()} removed from {self._enclosure_id}"
+
+#   String representation
 
     def __str__(self):
         animal_list = ", ".join([a.get_name() for a in self._animals]) or "Empty"
