@@ -53,3 +53,15 @@ class Staff:
         if enclosure not in self._assigned_enclosures:
             self._assigned_enclosures.append(enclosure)
 
+# Basic action
+
+    def feed_animal(self, animal):
+        if animal not in self._assigned_animals:
+            return f"{self._name} is not assigned to care for {animal.get_name()}"
+        return f"{self._name} ({self._role}) feeds {animal.get_name()}: {animal.eat()}"
+
+# String representation
+
+    def __str__(self):
+        return (f"{self._role.capitalize()}: {self._name}\n"
+                f"ID: {self._employee_id}")
