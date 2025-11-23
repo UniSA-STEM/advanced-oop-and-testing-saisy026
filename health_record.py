@@ -45,7 +45,7 @@ class HealthRecord:
 
 # String display method
     def __str__(self):
-        return (f"Date: {self._date_recorded}"
-                f"Severity level: {self._severity} "
-                f"Description: {self._description} "
+        return (f"Date: {self._date_recorded}\n" 
+                f"Severity level: {self._severity}\n" 
+                f"Description: {self._description}\n"
                 f"Treatment: {self._treatment or 'None'}")

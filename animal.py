@@ -78,3 +78,11 @@ class Animal:
 
     def sleep(self):
         return f"{self._name} is sleeping"
+
+# Used when add or remove the animal in enclosure
+    def set_enclosure(self, enclosure):
+        self._enclosure = enclosure
+
+# Called when the animal leaves an enclosure
+    def remove_from_enclosure(self):
+        self._enclosure = None

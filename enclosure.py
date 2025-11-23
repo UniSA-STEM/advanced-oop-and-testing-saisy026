@@ -49,12 +49,12 @@ class Enclosure:
     def is_full(self):
         return len(self._animals) >= self._max_capacity
 
-    def clean(self):
+    def clean(self,cleanliness_increase):
         cleanliness_increase = 50
         self._cleanliness = min(100, self._cleanliness + cleanliness_increase)
         return f" Enclosure {self._enclosure_id} cleaned. Cleanliness now: {self._cleanliness}% "
 
-    def reduce_cleanliness(self):
+    def reduce_cleanliness(self,amount):
         amount = 10
         self._cleanliness = max(0, self._cleanliness - amount)
 
@@ -68,4 +68,41 @@ class Enclosure:
         if self._allowed_category is None:
             return True
         return animal.get_category() == self._allowed_category
+
+    def add_animal(self, animal):
+        if not isinstance(animal, Animal):
+            raise ValueError("Only Animal objects can be added")
+        if animal.get_enclosure() is not None:
+            raise ValueError(f"{animal.get_name()} is already in another enclosure")
+        if animal.is_under_treatment():
+            raise ValueError(f"{animal.get_name()} is under treatment and cannot be moved")
+        if not self.can_add_animal(animal):
+            raise ValueError(f"Cannot add {animal.get_species()} to {self._enclosure_id}")
+
+        self._animals.append(animal)
+        if self._allowed_category is None:
+            self._allowed_category = animal.get_category()
+
+        animal.set_enclosure(self)
+        self.reduce_cleanliness(5)
+        return f"{animal.get_name()} added to {self._enclosure_id}"
+
+    def remove_animal(self, animal):
+        if animal not in self._animals:
+            raise ValueError(f"{animal.get_name()} not in this enclosure")
+
+        self._animals.remove(animal)
+        animal.remove_from_enclosure()  # Clean way
+        if not self._animals:
+            self._allowed_category = None
+        return f"{animal.get_name()} removed from {self._enclosure_id}"
+
+    def __str__(self):
+        animal_list = ", ".join([a.get_name() for a in self._animals]) or "Empty"
+        return (f"Enclosure {self._enclosure_id}\n"
+                f"Type: {self._environment_type}\n"
+                f"Occupancy: {len(self._animals)}/{self._max_capacity}\n"
+                f"Cleanliness: {self._cleanliness}%\n"
+                f"Animals: {animal_list}")
+
 
