@@ -25,6 +25,7 @@ class Enclosure:
         self._max_capacity = max_capacity
         self._animals = []
         self._cleanliness = 100
+        self._allowed_category = None
 
 # Getters
     def get_enclosure_id(self):
@@ -49,8 +50,22 @@ class Enclosure:
         return len(self._animals) >= self._max_capacity
 
     def clean(self):
-        self.cleanliness_increase = 50
-        self._cleanliness = min(100, self._cleanliness + self.cleanliness_increase)
+        cleanliness_increase = 50
+        self._cleanliness = min(100, self._cleanliness + cleanliness_increase)
         return f" Enclosure {self._enclosure_id} cleaned. Cleanliness now: {self._cleanliness}% "
 
+    def reduce_cleanliness(self):
+        amount = 10
+        self._cleanliness = max(0, self._cleanliness - amount)
+
+    def can_add_animal(self, animal):
+        if not isinstance(animal, Animal):
+            return False
+        if self.is_full():
+            return False
+        if animal.get_required_environment().lower() != self._environment_type.lower():
+            return False
+        if self._allowed_category is None:
+            return True
+        return animal.get_category() == self._allowed_category
 
