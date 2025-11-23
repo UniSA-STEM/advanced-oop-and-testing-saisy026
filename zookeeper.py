@@ -18,4 +18,4 @@ class Zookeeper(Staff):
             raise ValueError("Invalid enclosure")
         if enclosure not in self._assigned_enclosures:
             return f"{self._name} is not assigned to clean enclosure {enclosure.get_enclosure_id()}"
-        return f"Zookeeper {self._name} {enclosure.clean(50)}"
+        return f"Zookeeper {self._name} {enclosure.clean()}"
