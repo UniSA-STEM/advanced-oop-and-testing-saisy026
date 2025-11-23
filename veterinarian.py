@@ -6,3 +6,9 @@ ID: 110434667
 Username: saisy026
 This is my own work as defined by the University's Academic Integrity Policy.
 """
+from staff import Staff
+
+class Veterinarian(Staff):
+    def __init__(self, name, employee_id):
+        super().__init__(name, employee_id, "veterinarian")
+

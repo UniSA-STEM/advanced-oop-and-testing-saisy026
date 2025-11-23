@@ -18,3 +18,9 @@ class Staff:
         self._name = name
         self._employee_id = employee_id
         self._role = role
+
+    def get_name(self):
+        return self._name
+
+    def get_role(self):
+        return self._role
