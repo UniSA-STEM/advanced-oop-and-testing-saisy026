@@ -11,7 +11,7 @@ from animal import Animal
 
 class Mammal(Animal):
     def __init__(self, name, species, age,dietary_needs, required_environment):
-        super().__init__(name, species, age, dietary_needs,required_environment, category="mammal")
+        super().__init__(name=name,species=species,age=age,dietary_needs=dietary_needs,category="mammal",required_environment=required_environment)
 
     def make_sound(self):
         return f"{self.get_name()} roars!"

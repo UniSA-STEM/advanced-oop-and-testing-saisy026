@@ -57,8 +57,7 @@ class Enclosure:
         self._cleanliness = min(100, self._cleanliness + cleanliness_increase)
         return f" Enclosure {self._enclosure_id} cleaned. Cleanliness now: {self._cleanliness}% "
 
-    def reduce_cleanliness(self):
-        amount = 10
+    def reduce_cleanliness(self,amount = 10):
         self._cleanliness = max(0, self._cleanliness - amount)
 
 #   Checks

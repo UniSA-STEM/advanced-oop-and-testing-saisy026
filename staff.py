@@ -15,7 +15,7 @@ class Staff:
         if not name or not isinstance(name, str):
             raise ValueError("Name must be string")
         if not employee_id or not isinstance(employee_id, str):
-            raise ValueError("Employee ID must be positive Integer")
+            raise ValueError("Employee ID must be a string")
         if role not in ["zookeeper", "veterinarian"]:
             raise ValueError("Role must be 'zookeeper' or 'veterinarian'")
 
@@ -42,16 +42,22 @@ class Staff:
 # Assign methods
 
     def assign_to_animal(self, animal):
+        if self._role != "veterinarian":
+            raise ValueError(f"Only veterinarians can be assigned to individual animals, not {self._role}s")
         if not isinstance(animal, Animal):
-            raise ValueError("Can only assign Animal")
+            raise ValueError("Can only assign an Animal object")
         if animal not in self._assigned_animals:
             self._assigned_animals.append(animal)
+        return True  # Optional: makes it clear it succeeded
 
     def assign_to_enclosure(self, enclosure):
+        if self._role != "zookeeper":
+            raise ValueError(f"Only zookeepers can be assigned to enclosures, not {self._role}s")
         if not isinstance(enclosure, Enclosure):
-            raise ValueError("Can only assign Enclosure")
+            raise ValueError("Can only assign an Enclosure object")
         if enclosure not in self._assigned_enclosures:
             self._assigned_enclosures.append(enclosure)
+        return True
 
 # Basic action
 

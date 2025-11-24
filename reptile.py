@@ -10,8 +10,7 @@ from animal import Animal
 
 class Reptile(Animal):
     def __init__(self, name, species, age, dietary_needs, required_environment):
-            super().__init__(name, species, age, dietary_needs, required_environment, category="reptile")
-
+        super().__init__(name,species,age,dietary_needs,"reptile",required_environment)
     def make_sound(self):
         return f"{self.get_name()} hisses!"
 
