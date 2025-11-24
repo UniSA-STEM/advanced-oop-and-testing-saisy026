@@ -11,7 +11,7 @@ from datetime import datetime
 
 class Zoo:
     def __init__(self):
-        self._name = 'Oop Zoo'
+        self._name = "Simone's Zoo"
         self._animals = []
         self._enclosures = []
         self._staff = []
